@@ -1,12 +1,7 @@
 import agentCover from "../../images/Agent引擎.png";
 import agentDemoVideo from "../../images/agent演示.mp4";
-import boardGameCover from "../../images/智能五子棋机器人.png";
-import cottonRobotCover from "../../images/棉花播种机器人.png";
 import greenhouseRobotGif from "../../images/面向温室作物的盆栽表型信息获取机器人.gif";
-import greenhouseRobotCover from "../../images/面向温室的盆栽表型信息获取机器人.png";
 import navigationCover from "../../images/导航.png";
-import navigationDemoVideo from "../../images/导航演示.mp4";
-import seedlingCover from "../../images/育苗箱.png";
 
 export type ProjectAssetMedia = {
   kind: "image" | "gif" | "video";
@@ -36,21 +31,8 @@ const projectAssetsById: Record<string, ProjectAssets> = {
   },
   "ros2-mcp-nav-agent": {
     coverImage: navigationCover,
-    detailMedia: [
-      {
-        kind: "video",
-        src: navigationDemoVideo,
-        alt: "ROS2具身智能导航系统演示视频",
-        label: "导航演示视频",
-        poster: navigationCover,
-      },
-    ],
-  },
-  "seedling-incubator": {
-    coverImage: seedlingCover,
   },
   "greenhouse-phenotyping-robot": {
-    coverImage: greenhouseRobotCover,
     detailMedia: [
       {
         kind: "gif",
@@ -59,12 +41,6 @@ const projectAssetsById: Record<string, ProjectAssets> = {
         label: "项目演示 GIF",
       },
     ],
-  },
-  "cotton-seeding-robot": {
-    coverImage: cottonRobotCover,
-  },
-  "board-game-robot": {
-    coverImage: boardGameCover,
   },
 };
 
