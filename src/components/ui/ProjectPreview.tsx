@@ -1,4 +1,5 @@
 import type { CSSProperties } from "react";
+import { getProjectAssets } from "../../data/projectAssets";
 import type { ProjectItem } from "../../data/siteContent";
 
 type ProjectPreviewProps = {
@@ -28,7 +29,8 @@ export function ProjectPreview({
   tall = false,
   className = "",
 }: ProjectPreviewProps) {
-  const showCenterOrb = !project.image;
+  const resolvedImage = getProjectAssets(project.id)?.coverImage ?? project.image;
+  const showCenterOrb = !resolvedImage;
   const previewStyle: CSSProperties = {
     background: getPreviewBackground(project),
     boxShadow: `inset 0 1px 0 rgba(255,255,255,0.06), 0 0 60px ${project.accentColor}20`,
@@ -39,12 +41,12 @@ export function ProjectPreview({
       className={`relative isolate overflow-hidden rounded-[28px] border border-white/10 ${compact ? "h-44 sm:h-52" : tall ? "h-60 md:h-[21rem]" : "h-64"} ${className}`}
       style={previewStyle}
     >
-      {project.image ? (
+      {resolvedImage ? (
         <>
           <img
             alt={project.title}
             className="absolute inset-0 z-0 h-full w-full object-cover"
-            src={project.image}
+            src={resolvedImage}
           />
           <div className="absolute inset-0 z-[1] bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/10" />
         </>

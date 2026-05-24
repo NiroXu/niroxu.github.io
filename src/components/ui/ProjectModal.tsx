@@ -1,6 +1,7 @@
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowUpRight, Github, X } from "lucide-react";
 import { useEffect, useRef } from "react";
+import { getProjectAssets } from "../../data/projectAssets";
 import type { ProjectItem } from "../../data/siteContent";
 import { ProjectPreview } from "./ProjectPreview";
 
@@ -11,6 +12,7 @@ type ProjectModalProps = {
 
 export function ProjectModal({ project, onClose }: ProjectModalProps) {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
+  const detailMedia = project ? getProjectAssets(project.id)?.detailMedia ?? [] : [];
 
   useEffect(() => {
     if (!project) {
@@ -77,6 +79,39 @@ export function ProjectModal({ project, onClose }: ProjectModalProps) {
                       </span>
                     ))}
                   </div>
+                  {detailMedia.length > 0 ? (
+                    <div className="mt-8 space-y-5">
+                      <p className="text-sm uppercase tracking-[0.3em] text-slate-400">
+                        Media
+                      </p>
+                      {detailMedia.map((media) => (
+                        <div key={`${media.kind}-${media.src}`} className="space-y-3">
+                          <p className="text-sm font-medium text-slate-300">{media.label}</p>
+                          <div className="overflow-hidden rounded-[24px] border border-white/10 bg-slate-950/70">
+                            {media.kind === "video" ? (
+                              <video
+                                className="block aspect-video w-full bg-slate-950"
+                                controls
+                                playsInline
+                                poster={media.poster}
+                                preload="metadata"
+                              >
+                                <source src={media.src} />
+                                抱歉，当前浏览器不支持该视频播放。
+                              </video>
+                            ) : (
+                              <img
+                                alt={media.alt}
+                                className="block h-auto w-full object-cover"
+                                loading="lazy"
+                                src={media.src}
+                              />
+                            )}
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  ) : null}
                 </div>
 
                 <div className="flex flex-col justify-between">
