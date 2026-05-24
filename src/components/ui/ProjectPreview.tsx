@@ -30,6 +30,7 @@ export function ProjectPreview({
   className = "",
 }: ProjectPreviewProps) {
   const resolvedImage = getProjectAssets(project.id)?.coverImage ?? project.image;
+  const isPortraitProject = project.id === "greenhouse-phenotyping-robot";
   const showCenterOrb = !resolvedImage;
   const previewStyle: CSSProperties = {
     background: getPreviewBackground(project),
@@ -45,7 +46,7 @@ export function ProjectPreview({
         <>
           <img
             alt={project.title}
-            className="absolute inset-0 z-0 h-full w-full object-cover"
+            className={`absolute inset-0 z-0 h-full w-full ${isPortraitProject ? "object-contain p-3 sm:p-4" : "object-cover"}`}
             src={resolvedImage}
           />
           <div className="absolute inset-0 z-[1] bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/10" />
