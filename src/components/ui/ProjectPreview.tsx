@@ -44,12 +44,25 @@ export function ProjectPreview({
     >
       {resolvedImage ? (
         <>
-          <img
-            alt={project.title}
-            className={`absolute inset-0 z-0 h-full w-full ${isPortraitProject ? "object-contain p-3 sm:p-4" : "object-cover"}`}
-            src={resolvedImage}
-          />
-          <div className="absolute inset-0 z-[1] bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/10" />
+          {isPortraitProject ? (
+            <>
+              <div className="absolute inset-0 z-0 bg-[radial-gradient(circle_at_50%_32%,rgba(255,255,255,0.08),transparent_24%),linear-gradient(180deg,rgba(15,23,42,0.22),rgba(2,6,23,0.08))]" />
+              <div className="absolute inset-y-3 left-1/2 z-[1] w-[34%] min-w-[8.25rem] -translate-x-1/2 overflow-hidden rounded-[22px] border border-white/12 bg-slate-950/18 shadow-[0_18px_60px_rgba(0,0,0,0.28)] sm:inset-y-4 sm:min-w-[9.5rem]">
+                <img
+                  alt={project.title}
+                  className="h-full w-full object-cover object-top"
+                  src={resolvedImage}
+                />
+              </div>
+            </>
+          ) : (
+            <img
+              alt={project.title}
+              className="absolute inset-0 z-0 h-full w-full object-cover"
+              src={resolvedImage}
+            />
+          )}
+          <div className="absolute inset-0 z-[2] bg-gradient-to-t from-slate-950 via-slate-950/40 to-slate-950/10" />
         </>
       ) : null}
       {showCenterOrb ? (
